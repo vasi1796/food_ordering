@@ -22,7 +22,7 @@ DerivedData
 *.xcuserstate
 project.xcworkspace
 
-# Android/IJ
+# android/IJ
 #
 *.iml
 .idea
