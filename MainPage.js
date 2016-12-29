@@ -18,17 +18,21 @@ class MainPage extends Component {
         return (
             <View style={styles.general_view}>
                 <View style={[
-                    styles.general_view, {
+                    styles.peopleInCaffeteria, {
                         width: win_width,
                         backgroundColor: 'steelblue'
                     }
                 ]}>
-                    <Text style={{
-                        textAlignVertical: 'center'
-                    }}>People in Caffeteria:</Text>
-                    <Text style={{
-                        textAlignVertical: 'center'
-                    }} onPress={this.handleNumberOfPeople}>20</Text>
+                    <Text style={[
+                        styles.text, {
+                            textAlignVertical: 'center'
+                        }
+                    ]}>Oameni in cantina:</Text>
+                    <Text style={[
+                        styles.text, {
+                            textAlignVertical: 'center'
+                        }
+                    ]} onPress={this.handleNumberOfPeople}>20</Text>
                 </View>
                 <View style={{
                     flex: 9,
@@ -41,7 +45,7 @@ class MainPage extends Component {
                                 backgroundColor: 'powderblue'
                             }
                         ]}>
-                            <Text>View Order</Text>
+                            <Text style={styles.text}>Vezi Comanda</Text>
                         </View>
                     </TouchableNativeFeedback>
                     <TouchableNativeFeedback onPress={this.gotoMenuPage.bind(this)} background={TouchableNativeFeedback.SelectableBackground()}>
@@ -50,7 +54,7 @@ class MainPage extends Component {
                                 backgroundColor: 'skyblue'
                             }
                         ]}>
-                            <Text>Order</Text>
+                            <Text style={styles.text}>Comanda Mancare</Text>
                         </View>
                     </TouchableNativeFeedback>
                 </View>
@@ -75,10 +79,21 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
+    peopleInCaffeteria: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignSelf: 'center',
+        alignItems: 'center'
+    },
     choices_view: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    text: {
+        color: 'white',
+        fontWeight: 'bold'
     }
 });
 module.exports = MainPage;

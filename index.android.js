@@ -16,13 +16,6 @@ var MainPage = require('./MainPage');
 var ViewOrderPage = require('./ViewOrderPage');
 
 class Food extends Component {
-    //componentWillMount() {
-    //    BackAndroid.addEventListener('hardwareBackPress', this._handleBackButtonPress.bind(this));
-    //}
-    //_handleBackButtonPress() {
-    //    console.log("yes")
-    //}
-
     _renderScene(route, navigator) {
         if (route.id === 1) {
             return <MenuPage navigator={navigator}/>
@@ -34,11 +27,19 @@ class Food extends Component {
     }
 
     render() {
-        return (<Navigator style={{
+        return (<Navigator ref={(nav) => {
+            navigator = nav;
+        }} style={{
             flex: 1
         }} initialRoute={{
             id: 2
-        }} renderScene={this._renderScene} configureScene={(route, routeStack) => Navigator.SceneConfigs.FloatFromBottomAndroid}/>);
+        }} renderScene={this._renderScene.bind(this)} configureScene={(route, routeStack) => {
+            if (route.id === 1) {
+                return Navigator.SceneConfigs.PushFromRight;
+            } else {
+                return Navigator.SceneConfigs.PushFromLeft;
+            }
+        }}/>);
     }
 }
 AppRegistry.registerComponent('Food', () => Food);
