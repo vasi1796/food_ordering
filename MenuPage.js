@@ -9,7 +9,8 @@ import {
     Button,
     BackAndroid,
     Dimensions,
-    ScrollView
+    ScrollView,
+    Switch
 } from 'react-native';
 var win_width = Dimensions.get('window').width;
 var win_height = Dimensions.get('window').height;
@@ -21,6 +22,34 @@ BackAndroid.addEventListener('hardwareBackPress', function() {
     }
     return false;
 });
+class MenuItem extends Component {
+    state = {
+        on: true,
+        off: false
+    };
+    render() {
+        return (
+            <View style={{
+                flexDirection: 'row'
+            }}>
+                <Text style={[
+                    styles.text, {
+                        flex: 1,
+                        textAlign: 'left'
+                    }
+                ]}>Cartofi</Text>
+                <Text style={[
+                    styles.text, {
+                        textAlign: 'right'
+                    }
+                ]}>15</Text>
+                <Switch onValueChange={(value) => this.setState({on: value})} onTintColor="#00ff00" style={{
+                    marginBottom: 10, paddingLeft:10, paddingTop:0.1
+                }} thumbTintColor="#0000ff" tintColor="#ff0000" value={this.state.on}/>
+            </View>
+        );
+    }
+}
 
 class MenuPage extends Component {
     render() {
@@ -30,7 +59,7 @@ class MenuPage extends Component {
                 <Button style={{
                     width: win_width,
                     flex: 1
-                }} onPress={this.gotoMainPage.bind(this)} title="Inapoi" color="steelblue"/>
+                }} onPress={this.gotoMainPage.bind(this)} title="Inapoi" color="#1565C0"/>
                 <View style={styles.orderMenu}>
                     <View style={styles.singleText}>
                         <Text style={styles.text}>Meniu</Text>
@@ -38,21 +67,7 @@ class MenuPage extends Component {
                     <ScrollView ref={(scrollView) => {
                         _scrollView = scrollView;
                     }} automaticallyAdjustContentInsets={false} horizontal={false} style={styles.menuDescription}>
-                        <View style={{
-                            flexDirection: 'row'
-                        }}>
-                            <Text style={[
-                                styles.text, {
-                                    flex: 1,
-                                    textAlign: 'left'
-                                }
-                            ]}>Cartofi</Text>
-                            <Text style={[
-                                styles.text, {
-                                    textAlign: 'right'
-                                }
-                            ]}>15</Text>
-                        </View>
+                        <MenuItem/>
                     </ScrollView>
                     <View style={styles.totalBoxText}>
                         <Text style={styles.text}>Total: 15</Text>

@@ -8,7 +8,8 @@ import {
     TouchableHighlight,
     TouchableNativeFeedback,
     Navigator,
-    BackAndroid
+    BackAndroid,
+    StatusBar
 } from 'react-native';
 
 var MenuPage = require('./MenuPage');
@@ -27,7 +28,8 @@ class Food extends Component {
     }
 
     render() {
-        return (<Navigator ref={(nav) => {
+        return (
+          <Navigator ref={(nav) => {
             navigator = nav;
         }} style={{
             flex: 1

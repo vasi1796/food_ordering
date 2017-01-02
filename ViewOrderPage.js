@@ -29,7 +29,7 @@ class ViewOrderPage extends Component {
                 <Button style={{
                     width: win_width,
                     flex: 1
-                }} onPress={this.gotoMainPage.bind(this)} title="Inapoi" color="steelblue"/>
+                }} onPress={this.gotoMainPage.bind(this)} title="Inapoi" color="#1565C0"/>
                 <View style={styles.noTicket}>
                     <Text style={styles.text}>Nr Tichet: 12</Text>
                 </View>
