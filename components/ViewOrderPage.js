@@ -1,16 +1,12 @@
-'use strict';
-
-import React, {Component} from 'react'
+import React, {Component} from 'react';
 import {
     StyleSheet,
     Text,
     View,
-    TouchableNativeFeedback,
+    Dimensions,
     Button,
     BackAndroid,
-    Dimensions,
-    ScrollView,
-    Switch
+    ScrollView
 } from 'react-native';
 var win_width = Dimensions.get('window').width;
 var win_height = Dimensions.get('window').height;
@@ -22,36 +18,8 @@ BackAndroid.addEventListener('hardwareBackPress', function() {
     }
     return false;
 });
-class MenuItem extends Component {
-    state = {
-        on: true,
-        off: false
-    };
-    render() {
-        return (
-            <View style={{
-                flexDirection: 'row'
-            }}>
-                <Text style={[
-                    styles.text, {
-                        flex: 1,
-                        textAlign: 'left'
-                    }
-                ]}>Cartofi</Text>
-                <Text style={[
-                    styles.text, {
-                        textAlign: 'right'
-                    }
-                ]}>15</Text>
-                <Switch onValueChange={(value) => this.setState({on: value})} onTintColor="#00ff00" style={{
-                    marginBottom: 10, paddingLeft:10, paddingTop:0.1
-                }} thumbTintColor="#0000ff" tintColor="#ff0000" value={this.state.on}/>
-            </View>
-        );
-    }
-}
 
-class MenuPage extends Component {
+class ViewOrderPage extends Component {
     render() {
         var _scrollView : ScrollView;
         return (
@@ -60,35 +28,44 @@ class MenuPage extends Component {
                     width: win_width,
                     flex: 1
                 }} onPress={this.gotoMainPage.bind(this)} title="Inapoi" color="#1565C0"/>
+                <View style={styles.noTicket}>
+                    <Text style={styles.text}>Nr Tichet: 12</Text>
+                </View>
                 <View style={styles.orderMenu}>
                     <View style={styles.singleText}>
-                        <Text style={styles.text}>Meniu</Text>
+                        <Text style={styles.text}>Comanda</Text>
                     </View>
                     <ScrollView ref={(scrollView) => {
                         _scrollView = scrollView;
-                    }} automaticallyAdjustContentInsets={false} horizontal={false} style={styles.menuDescription}>
-                        <MenuItem/>
+                    }} automaticallyAdjustContentInsets={false} horizontal={false} style={styles.orderDescription}>
+                        <View style={{
+                            flexDirection: 'row'
+                        }}>
+                            <Text style={[
+                                styles.text, {
+                                    flex: 1,
+                                    textAlign: 'left'
+                                }
+                            ]}>Cartofi</Text>
+                            <Text style={[
+                                styles.text, {
+                                    textAlign: 'right'
+                                }
+                            ]}>15</Text>
+                        </View>
                     </ScrollView>
                     <View style={styles.totalBoxText}>
                         <Text style={styles.text}>Total: 15</Text>
                     </View>
                 </View>
-                <TouchableNativeFeedback onPress={this.orderFood} background={TouchableNativeFeedback.SelectableBackground()}>
-                    <View style={styles.placeOrder}>
-                        <Text style={styles.text}>Comanda</Text>
-                    </View>
-                </TouchableNativeFeedback>
             </View>
         );
     }
     gotoMainPage() {
         this.props.navigator.pop();
     }
-    orderFood() {
-        console.log("food ordered");
-    }
-}
 
+}
 const styles = StyleSheet.create({
     parentView: {
         flex: 1,
@@ -116,6 +93,7 @@ const styles = StyleSheet.create({
     totalBoxText: {
         alignSelf: 'center',
         width: win_width - 50,
+        marginBottom: 10,
         padding: 15,
         borderWidth: 0.1,
         backgroundColor: 'steelblue',
@@ -124,7 +102,7 @@ const styles = StyleSheet.create({
         borderBottomLeftRadius: 8,
         borderBottomRightRadius: 8
     },
-    placeOrder: {
+    noTicket: {
         alignSelf: 'center',
         width: win_width - 50,
         margin: 10,
@@ -135,7 +113,7 @@ const styles = StyleSheet.create({
         borderWidth: 0.1,
         borderRadius: 8
     },
-    menuDescription: {
+    orderDescription: {
         alignSelf: 'center',
         width: win_width - 50,
         padding: 15,
@@ -147,4 +125,4 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     }
 });
-module.exports = MenuPage;
+module.exports = ViewOrderPage;

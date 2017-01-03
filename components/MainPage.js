@@ -1,14 +1,11 @@
 'use strict';
 import React, {Component} from 'react';
 import {
-    AppRegistry,
     StyleSheet,
     Text,
     View,
     Dimensions,
-    TouchableHighlight,
     TouchableNativeFeedback,
-    Navigator,
     StatusBar
 } from 'react-native';
 var win_width = Dimensions.get('window').width;

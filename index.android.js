@@ -1,20 +1,12 @@
 import React, {Component} from 'react';
 import {
     AppRegistry,
-    StyleSheet,
-    Text,
-    View,
-    Dimensions,
-    TouchableHighlight,
-    TouchableNativeFeedback,
-    Navigator,
-    BackAndroid,
-    StatusBar
+    Navigator
 } from 'react-native';
 
-var MenuPage = require('./MenuPage');
-var MainPage = require('./MainPage');
-var ViewOrderPage = require('./ViewOrderPage');
+var MenuPage = require('./components/MenuPage');
+var MainPage = require('./components/MainPage');
+var ViewOrderPage = require('./components/ViewOrderPage');
 
 class Food extends Component {
     _renderScene(route, navigator) {
