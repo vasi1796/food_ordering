@@ -8,6 +8,7 @@ import {
     TouchableNativeFeedback,
     StatusBar
 } from 'react-native';
+var styles = require('../style/styles');
 var win_width = Dimensions.get('window').width;
 var win_height = Dimensions.get('window').height;
 var counter = 15;
@@ -15,11 +16,8 @@ var counter = 15;
 class MainPage extends Component {
     render() {
         return (
-            <View style={styles.general_view}>
-              <StatusBar
-           backgroundColor="#0D47A1"
-           barStyle="light-content"
-         />
+            <View style={styles.mainPage_generalView}>
+                <StatusBar backgroundColor="#0D47A1" barStyle="light-content"/>
                 <View style={[
                     styles.peopleInCaffeteria, {
                         width: win_width,
@@ -76,28 +74,5 @@ class MainPage extends Component {
         console.log('update people pressed');
     }
 }
-const styles = StyleSheet.create({
-    general_view: {
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    peopleInCaffeteria: {
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignSelf: 'center',
-        alignItems: 'center'
-    },
-    choices_view: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    text: {
-        color: 'white',
-        fontWeight: 'bold'
-    }
-});
+
 module.exports = MainPage;

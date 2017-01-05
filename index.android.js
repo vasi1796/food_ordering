@@ -1,8 +1,5 @@
 import React, {Component} from 'react';
-import {
-    AppRegistry,
-    Navigator
-} from 'react-native';
+import {AppRegistry, Navigator} from 'react-native';
 
 var MenuPage = require('./components/MenuPage');
 var MainPage = require('./components/MainPage');
@@ -20,8 +17,7 @@ class Food extends Component {
     }
 
     render() {
-        return (
-          <Navigator ref={(nav) => {
+        return (<Navigator ref={(nav) => {
             navigator = nav;
         }} style={{
             flex: 1
