@@ -1,7 +1,6 @@
 'use strict';
 import React, {Component} from 'react';
 import {
-    StyleSheet,
     Text,
     View,
     Dimensions,
@@ -11,8 +10,26 @@ import {
 var styles = require('../style/styles');
 var win_width = Dimensions.get('window').width;
 var win_height = Dimensions.get('window').height;
-var counter = 15;
 
+class PeopleCounter extends Component {
+    state = {
+        people: 0
+    };
+    onPress = () => {
+        this.setState({
+            people: this.state.people + 1
+        });
+    }
+    render() {
+        return (
+            <Text style={[
+                styles.text, {
+                    textAlignVertical: 'center'
+                }
+            ]} onPress={this.onPress}>{this.state.people}</Text>
+        );
+    }
+}
 class MainPage extends Component {
     render() {
         return (
@@ -29,11 +46,7 @@ class MainPage extends Component {
                             textAlignVertical: 'center'
                         }
                     ]}>Oameni in cantina:</Text>
-                    <Text style={[
-                        styles.text, {
-                            textAlignVertical: 'center'
-                        }
-                    ]} onPress={this.handleNumberOfPeople}>{counter}</Text>
+                    <PeopleCounter/>
                 </View>
                 <View style={{
                     flex: 9,
@@ -68,10 +81,6 @@ class MainPage extends Component {
     }
     gotoMenuPage() {
         this.props.navigator.push({id: 1, name: 'MenuPage'});
-    }
-    handleNumberOfPeople() {
-        counter++;
-        console.log('update people pressed');
     }
 }
 
