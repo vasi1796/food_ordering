@@ -1,3 +1,5 @@
+#University project for caffeteria ordering
+
 To setup React-Native on machine<br/>
 https://facebook.github.io/react-native/releases/next/docs/getting-started.html#content </br>
 
