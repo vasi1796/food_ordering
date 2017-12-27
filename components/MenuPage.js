@@ -10,9 +10,12 @@ import {
     Dimensions,
     ScrollView,
     Switch,
-    ToastAndroid
+    ToastAndroid,
+    ActivityIndicator,
+  RefreshControl,
 } from 'react-native';
 import TimerMixin from 'react-timer-mixin';
+import { connect } from 'react-redux';
 
 var styles = require('../style/styles');
 var win_width = Dimensions.get('window').width;
@@ -89,18 +92,22 @@ class MenuItem extends Component {
         );
     }
 }
-
+@connect(
+  state => ({
+    menus: state.menu_reducer.menus,
+    loading: state.menu_reducer.loading,
+  }),
+  dispatch => ({
+    refresh: () => dispatch({type: 'GET_MENU_DATA'}),
+  }),
+)
 class MenuPage extends Component {
     componentWillMount() {
         totalValue = 0;
     }
     render() {
+        const { menus, loading, refresh } = this.props;
         var _scrollView : ScrollView;
-        var menuItems = [];
-        var getJsonMenu = ["Supa", "Cartofi", "Snitel"];
-        for (var i = 0; i < getJsonMenu.length; i++) {
-            menuItems.push(<MenuItem name={getJsonMenu[i]} price={i + 3} key={i}/>);
-        };
         return (
             <View style={styles.parentView}>
                 <Button style={{
@@ -111,11 +118,25 @@ class MenuPage extends Component {
                     <View style={styles.singleText}>
                         <Text style={styles.text}>Meniu</Text>
                     </View>
-                    <ScrollView ref={(scrollView) => {
+                    {menus ? 
+                    <ScrollView
+                    // Hide all scroll indicators
+                    showsHorizontalScrollIndicator={false}
+                    showsVerticalScrollIndicator={false}
+                    refreshControl={
+                    <RefreshControl refreshing={loading} onRefresh={refresh}/>}>
+                        <ScrollView ref={(scrollView) => {
                         _scrollView = scrollView;
-                    }} automaticallyAdjustContentInsets={false} horizontal={false} style={styles.menuDescription}>
-                        {menuItems}
+                        }} automaticallyAdjustContentInsets={false} horizontal={false} style={styles.menuDescription}>
+                        {menus.map((menu, index) => <MenuItem
+                            name={menu.title}
+                            price={parseInt(menu.price)}
+                            key={index}
+                        />)}
+                        </ScrollView>
                     </ScrollView>
+                    : 
+                    <ActivityIndicator animating={loading} size="large"/>}
                     <View style={styles.totalBoxText}>
                         <Text style={styles.text}>Total:
                             <TotalPrice/></Text>

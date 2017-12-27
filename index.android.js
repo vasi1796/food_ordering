@@ -1,5 +1,16 @@
 import React, {Component} from 'react';
 import {AppRegistry,Navigator} from 'react-native';
+import { createStore, applyMiddleware,combineReducers } from 'redux';
+import { Provider } from 'react-redux';
+import { apiMiddleware, menu_reducer,order_reducer } from './redux';
+
+// Create Redux store
+const rootReducer = combineReducers({
+    menu_reducer,
+    order_reducer
+});
+const store = createStore(rootReducer, applyMiddleware(apiMiddleware));
+store.dispatch({type: 'GET_MENU_DATA'});
 
 var MenuPage = require('./components/MenuPage');
 var MainPage = require('./components/MainPage');
@@ -17,7 +28,8 @@ class Food extends Component {
     }
 
     render() {
-        return (<Navigator ref={(nav) => {
+        return (<Provider store={store}>
+            <Navigator ref={(nav) => {
             navigator = nav;
         }} style={{
             flex: 1
@@ -29,7 +41,9 @@ class Food extends Component {
             } else {
                 return Navigator.SceneConfigs.PushFromLeft;
             }
-        }}/>);
+        }}/>
+        </Provider>);
     }
 }
+
 AppRegistry.registerComponent('Food', () => Food);
