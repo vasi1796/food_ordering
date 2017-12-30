@@ -1,22 +1,17 @@
 import React, {Component} from 'react';
 import {AppRegistry,Navigator} from 'react-native';
-import { createStore, applyMiddleware,combineReducers } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import { apiMiddleware, menu_reducer,order_reducer,ticket_reducer } from './redux';
+import { apiMiddleware} from './src/api/caffeteria';
+import reducer from './src/reducers'
 
-// Create Redux store
-const rootReducer = combineReducers({
-    menu_reducer,
-    order_reducer,
-    ticket_reducer
-});
-const store = createStore(rootReducer, applyMiddleware(apiMiddleware));
+const store = createStore(reducer, applyMiddleware(apiMiddleware));
 store.dispatch({type: 'GET_MENU_DATA'});
 store.dispatch({type: 'GET_ORDER_DATA'});
 
-var MenuPage = require('./components/MenuPage');
-var MainPage = require('./components/MainPage');
-var ViewOrderPage = require('./components/ViewOrderPage');
+var MenuPage = require('./src/components/MenuPage');
+var MainPage = require('./src/components/MainPage');
+var ViewOrderPage = require('./src/components/ViewOrderPage');
 
 class Food extends Component {
     _renderScene(route, navigator) {
