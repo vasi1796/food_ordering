@@ -5,8 +5,11 @@ import {
     Dimensions,
     Button,
     BackAndroid,
-    ScrollView
+    ScrollView,
+    RefreshControl,
+    ActivityIndicator
 } from 'react-native';
+import { connect } from 'react-redux';
 var styles = require('../style/styles');
 var win_width = Dimensions.get('window').width;
 var win_height = Dimensions.get('window').height;
@@ -39,8 +42,19 @@ class OrderItem extends Component {
         );
     }
 }
+
+@connect(
+  state => ({
+    order: state.order_reducer.order,
+    loading: state.order_reducer.loading,
+  }),
+  dispatch => ({
+    refresh: () => dispatch({type: 'GET_ORDER_DATA'}),
+  }),
+)
 class ViewOrderPage extends Component {
     render() {
+        const { order, loading, refresh } = this.props;
         var _scrollView : ScrollView;
         return (
             <View style={styles.parentView}>
@@ -49,20 +63,33 @@ class ViewOrderPage extends Component {
                     flex: 1
                 }} onPress={this.gotoMainPage.bind(this)} title="Inapoi" color="#1565C0"/>
                 <View style={styles.noTicket}>
-                    <Text style={styles.text}>Nr Tichet: 12</Text>
+                    <Text style={styles.text}>Nr Tichet: {order!=null?order.ticket:"Nu exista in baza de date"}</Text>
                 </View>
                 <View style={styles.orderMenu}>
                     <View style={styles.singleText}>
                         <Text style={styles.text}>Comanda</Text>
                     </View>
+                    {order?
+                    <ScrollView
+                    // Hide all scroll indicators
+                    showsHorizontalScrollIndicator={false}
+                    showsVerticalScrollIndicator={false}
+                    refreshControl={
+                    <RefreshControl refreshing={loading} onRefresh={refresh} />}>
                     <ScrollView ref={(scrollView) => {
                         _scrollView = scrollView;
                     }} automaticallyAdjustContentInsets={false} horizontal={false} style={styles.orderDescription}>
-                        <OrderItem name="Cartofi" price="5"/>
-                        <OrderItem name="Supa" price="10"/>
+                    <OrderItem name={order.title} price={order.price}/>
                     </ScrollView>
+                    </ScrollView>
+                    :
+                    <ScrollView ref={(scrollView) => {
+                        _scrollView = scrollView;
+                    }} automaticallyAdjustContentInsets={false} horizontal={false} style={styles.orderDescription}>
+                    <OrderItem name="Nu exista comanda" price=""/>
+                    </ScrollView>}
                     <View style={styles.orderTotalBoxText}>
-                        <Text style={styles.text}>Total: 15</Text>
+                        <Text style={styles.text}>Total: {order!=null?order.price:""}</Text>
                     </View>
                 </View>
             </View>

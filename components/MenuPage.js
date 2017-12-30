@@ -82,14 +82,17 @@ class MenuItem extends Component {
                 <Switch onValueChange={(value) => this.setState({
                     on: value
                 }, value
-                    ? calculator.addTotal(this.props.price)
-                    : calculator.subtractTotal(this.props.price))} onTintColor="#00ff00" style={{
+                    ? this.props.dispatch({type: 'ADD_TO_ORDER',price:this.props.price,name:this.props.name})/*calculator.addTotal(this.props.price)*/
+                    : this.props.dispatch({type: 'REMOVE_FROM_ORDER',price:this.props.price,name:this.props.name})/*calculator.subtractTotal(this.props.price)*/)} onTintColor="#00ff00" style={{
                     marginBottom: 10,
                     paddingLeft: 10,
                     paddingTop: 0.1
                 }} thumbTintColor="#0000ff" tintColor="#ff0000" value={this.state.on}/>
             </View>
         );
+    }
+    addToOrder(){
+        console.log(this.props);
     }
 }
 @connect(
@@ -106,7 +109,7 @@ class MenuPage extends Component {
         totalValue = 0;
     }
     render() {
-        const { menus, loading, refresh } = this.props;
+        const { menus, loading, refresh, store } = this.props;
         var _scrollView : ScrollView;
         return (
             <View style={styles.parentView}>
@@ -132,6 +135,7 @@ class MenuPage extends Component {
                             name={menu.title}
                             price={parseInt(menu.price)}
                             key={index}
+                            dispatch={store.dispatch}
                         />)}
                         </ScrollView>
                     </ScrollView>
@@ -142,7 +146,7 @@ class MenuPage extends Component {
                             <TotalPrice/></Text>
                     </View>
                 </View>
-                <TouchableNativeFeedback onPress={this.orderFood} background={TouchableNativeFeedback.SelectableBackground()}>
+                <TouchableNativeFeedback onPress={this.orderFood.bind(this)} background={TouchableNativeFeedback.SelectableBackground()}>
                     <View style={styles.placeOrder}>
                         <Text style={styles.text}>Comanda</Text>
                     </View>
@@ -154,6 +158,7 @@ class MenuPage extends Component {
         this.props.navigator.pop();
     }
     orderFood() {
+        this.props.store.dispatch({type:'SEND_ORDER_DATA'});
         ToastAndroid.show('Comanda plasata', ToastAndroid.SHORT);
     }
 }
