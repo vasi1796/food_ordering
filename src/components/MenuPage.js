@@ -12,24 +12,14 @@ import {
     Switch,
     ToastAndroid,
     ActivityIndicator,
-  RefreshControl,
+    RefreshControl,
 } from 'react-native';
-import TimerMixin from 'react-timer-mixin';
 import { connect } from 'react-redux';
+import MenuItem from './MenuItem';
 
 var styles = require('../style/styles');
 var win_width = Dimensions.get('window').width;
 var win_height = Dimensions.get('window').height;
-
-var totalValue = 0;
-var calculator = {
-    addTotal(value) {
-        totalValue = totalValue + value;
-    },
-    subtractTotal(value) {
-        totalValue = totalValue - value;
-    }
-};
 
 BackAndroid.addEventListener('hardwareBackPress', function() {
     if (navigator && navigator.getCurrentRoutes().length > 1) {
@@ -39,66 +29,11 @@ BackAndroid.addEventListener('hardwareBackPress', function() {
     return false;
 });
 
-class TotalPrice extends Component {
-    mixins : [TimerMixin];
-    state = {
-        total: totalValue
-    };
-    componentDidMount() {
-        this.update = TimerMixin.setInterval(() => {
-            this.setState({total: totalValue})
-        }, 500);
-    }
-    componentWillUnmount() {
-        TimerMixin.clearInterval(this.update);
-    }
-    render() {
-        return (
-            <Text style={styles.text}>{this.state.total}</Text>
-        );
-    }
-}
-
-class MenuItem extends Component {
-    state = {
-        on: false
-    };
-    render() {
-        return (
-            <View style={{
-                flexDirection: 'row'
-            }}>
-                <Text style={[
-                    styles.text, {
-                        flex: 1,
-                        textAlign: 'left'
-                    }
-                ]}>{this.props.name}</Text>
-                <Text style={[
-                    styles.text, {
-                        textAlign: 'right'
-                    }
-                ]}>{this.props.price}</Text>
-                <Switch onValueChange={(value) => this.setState({
-                    on: value
-                }, value
-                    ? this.props.dispatch({type: 'ADD_TO_ORDER',price:this.props.price,name:this.props.name})/*calculator.addTotal(this.props.price)*/
-                    : this.props.dispatch({type: 'REMOVE_FROM_ORDER',price:this.props.price,name:this.props.name})/*calculator.subtractTotal(this.props.price)*/)} onTintColor="#00ff00" style={{
-                    marginBottom: 10,
-                    paddingLeft: 10,
-                    paddingTop: 0.1
-                }} thumbTintColor="#0000ff" tintColor="#ff0000" value={this.state.on}/>
-            </View>
-        );
-    }
-    addToOrder(){
-        console.log(this.props);
-    }
-}
 @connect(
   state => ({
     menus: state.menu_reducer.menus,
     loading: state.menu_reducer.loading,
+    totalPrice: state.ticket_reducer.price,
   }),
   dispatch => ({
     refresh: () => dispatch({type: 'GET_MENU_DATA'}),
@@ -106,10 +41,10 @@ class MenuItem extends Component {
 )
 class MenuPage extends Component {
     componentWillMount() {
-        totalValue = 0;
+      this.props.store.dispatch({type:'RESET_TICKET'});
     }
     render() {
-        const { menus, loading, refresh, store } = this.props;
+        const { menus, loading, refresh, store, totalPrice } = this.props;
         var _scrollView : ScrollView;
         return (
             <View style={styles.parentView}>
@@ -117,17 +52,18 @@ class MenuPage extends Component {
                     width: win_width,
                     flex: 1
                 }} onPress={this.gotoMainPage.bind(this)} title="Inapoi" color="#1565C0"/>
-                <View style={styles.orderMenu}>
-                    <View style={styles.singleText}>
-                        <Text style={styles.text}>Meniu</Text>
-                    </View>
-                    {menus ? 
-                    <ScrollView
+                <ScrollView
                     // Hide all scroll indicators
                     showsHorizontalScrollIndicator={false}
                     showsVerticalScrollIndicator={false}
                     refreshControl={
                     <RefreshControl refreshing={loading} onRefresh={refresh}/>}>
+                <View style={styles.orderMenu}>
+                    <View style={styles.singleText}>
+                        <Text style={styles.text}>Meniu</Text>
+                    </View>
+                    {menus ? 
+                    
                         <ScrollView ref={(scrollView) => {
                         _scrollView = scrollView;
                         }} automaticallyAdjustContentInsets={false} horizontal={false} style={styles.menuDescription}>
@@ -138,12 +74,11 @@ class MenuPage extends Component {
                             dispatch={store.dispatch}
                         />)}
                         </ScrollView>
-                    </ScrollView>
+                    
                     : 
                     <ActivityIndicator animating={loading} size="large"/>}
                     <View style={styles.totalBoxText}>
-                        <Text style={styles.text}>Total:
-                            <TotalPrice/></Text>
+                        <Text style={styles.text}>Total:{totalPrice}</Text>
                     </View>
                 </View>
                 <TouchableNativeFeedback onPress={this.orderFood.bind(this)} background={TouchableNativeFeedback.SelectableBackground()}>
@@ -151,6 +86,7 @@ class MenuPage extends Component {
                         <Text style={styles.text}>Comanda</Text>
                     </View>
                 </TouchableNativeFeedback>
+                </ScrollView>
             </View>
         );
     }

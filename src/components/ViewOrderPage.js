@@ -10,6 +10,8 @@ import {
     ActivityIndicator
 } from 'react-native';
 import { connect } from 'react-redux';
+import OrderItem from './OrderItem'
+
 var styles = require('../style/styles');
 var win_width = Dimensions.get('window').width;
 var win_height = Dimensions.get('window').height;
@@ -21,27 +23,6 @@ BackAndroid.addEventListener('hardwareBackPress', function() {
     }
     return false;
 });
-class OrderItem extends Component {
-    render() {
-        return (
-            <View style={{
-                flexDirection: 'row'
-            }}>
-                <Text style={[
-                    styles.text, {
-                        flex: 1,
-                        textAlign: 'left'
-                    }
-                ]}>{this.props.name}</Text>
-                <Text style={[
-                    styles.text, {
-                        textAlign: 'right'
-                    }
-                ]}>{this.props.price}</Text>
-            </View>
-        );
-    }
-}
 
 @connect(
   state => ({
@@ -62,6 +43,12 @@ class ViewOrderPage extends Component {
                     width: win_width,
                     flex: 1
                 }} onPress={this.gotoMainPage.bind(this)} title="Inapoi" color="#1565C0"/>
+                <ScrollView
+                    // Hide all scroll indicators
+                    showsHorizontalScrollIndicator={false}
+                    showsVerticalScrollIndicator={false}
+                    refreshControl={
+                    <RefreshControl refreshing={loading} onRefresh={refresh} />}>
                 <View style={styles.noTicket}>
                     <Text style={styles.text}>Nr Tichet: {order!=null?order.ticket:"Nu exista in baza de date"}</Text>
                 </View>
@@ -70,18 +57,13 @@ class ViewOrderPage extends Component {
                         <Text style={styles.text}>Comanda</Text>
                     </View>
                     {order?
-                    <ScrollView
-                    // Hide all scroll indicators
-                    showsHorizontalScrollIndicator={false}
-                    showsVerticalScrollIndicator={false}
-                    refreshControl={
-                    <RefreshControl refreshing={loading} onRefresh={refresh} />}>
+                    
                     <ScrollView ref={(scrollView) => {
                         _scrollView = scrollView;
                     }} automaticallyAdjustContentInsets={false} horizontal={false} style={styles.orderDescription}>
                     <OrderItem name={order.title} price={order.price}/>
                     </ScrollView>
-                    </ScrollView>
+                    
                     :
                     <ScrollView ref={(scrollView) => {
                         _scrollView = scrollView;
@@ -92,6 +74,7 @@ class ViewOrderPage extends Component {
                         <Text style={styles.text}>Total: {order!=null?order.price:""}</Text>
                     </View>
                 </View>
+                </ScrollView>
             </View>
         );
     }

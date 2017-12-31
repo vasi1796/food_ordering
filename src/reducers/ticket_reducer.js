@@ -3,20 +3,31 @@ import {
   REMOVE_FROM_ORDER,
   SEND_ORDER_DATA_LOADING,
   SENT_ORDER_DATA,
-  SEND_ORDER_DATA_ERROR
+  SEND_ORDER_DATA_ERROR,
+  RESET_TICKET
 } from '../constants/ActionTypes'
 
-export const ticket_reducer = (state={ticket:{},sent:false},action)=>{
+export const ticket_reducer = (state={ticket:[],sent:false,price:0},action)=>{
   switch(action.type){
-    case ADD_TO_ORDER:
-    console.log('add to order '+action.name);
+    case RESET_TICKET:
     return{
-      state,
+    ticket:[],
+    sent:false,
+    price:0
+    };
+    case ADD_TO_ORDER:
+    console.log(state.price);
+    return{
+      ...state,
+      ticket:[...state.ticket, action.name],
+      price:state.price+action.price
     };
     case REMOVE_FROM_ORDER:
-    console.log('remove from order '+action.name);
+    console.log(state.ticket);
     return{
-      state
+      ...state,
+      ticket:state.ticket.filter(item => item !== action.name),
+      price:state.price-action.price
     };
     case SEND_ORDER_DATA_LOADING:
     console.log('send order request');
