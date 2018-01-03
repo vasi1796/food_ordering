@@ -7,29 +7,12 @@ import {
     TouchableNativeFeedback,
     StatusBar
 } from 'react-native';
+import PeopleCounter from './PeopleCounter';
+
 var styles = require('../style/styles');
 var win_width = Dimensions.get('window').width;
 var win_height = Dimensions.get('window').height;
 
-class PeopleCounter extends Component {
-    state = {
-        people: 0
-    };
-    onPress = () => {
-        this.setState({
-            people: this.state.people + 1
-        });
-    }
-    render() {
-        return (
-            <Text style={[
-                styles.text, {
-                    textAlignVertical: 'center'
-                }
-            ]} onPress={this.onPress}>{this.state.people}</Text>
-        );
-    }
-}
 class MainPage extends Component {
     render() {
         return (
@@ -49,10 +32,9 @@ class MainPage extends Component {
                     <PeopleCounter/>
                 </View>
                 <View style={{
-                    flex: 9,
+                    flex: 10,
                     flexDirection: 'row'
                 }}>
-
                     <TouchableNativeFeedback onPress={this.gotoViewOrderPage.bind(this)} background={TouchableNativeFeedback.SelectableBackground()}>
                         <View style={[
                             styles.choices_view, {

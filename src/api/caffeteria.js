@@ -1,14 +1,8 @@
 import { Platform } from 'react-native';
 const API = 'http://192.168.100.3:3000/v1';
-
 export const apiMiddleware = store => next => action => {
   // Pass all actions through by default
   next(action);
-  var payload = {
-    ticket: "9",
-    title: "Meniul zilei",
-    price:"20"
- };
   switch (action.type) {
     // In case we receive an action to send an API request
     case 'GET_MENU_DATA':
@@ -40,6 +34,12 @@ export const apiMiddleware = store => next => action => {
         }));
       break;
     case 'SEND_ORDER_DATA':
+    var ticket_id=Math.floor(Math.random()* 100);
+      var payload = {
+    ticket: ticket_id.toString(),
+    title: store.getState().ticket_reducer.ticket,
+    price: store.getState().ticket_reducer.price
+ };
       var ticket = store.dispatch({type:'SEND_ORDER_DATA_LOADING'});
       fetch(`${API}/order`,
         {method:'POST',

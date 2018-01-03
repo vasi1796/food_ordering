@@ -16,14 +16,12 @@ export const ticket_reducer = (state={ticket:[],sent:false,price:0},action)=>{
     price:0
     };
     case ADD_TO_ORDER:
-    console.log(state.price);
     return{
       ...state,
       ticket:[...state.ticket, action.name],
       price:state.price+action.price
     };
     case REMOVE_FROM_ORDER:
-    console.log(state.ticket);
     return{
       ...state,
       ticket:state.ticket.filter(item => item !== action.name),

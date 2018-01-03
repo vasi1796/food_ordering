@@ -10,11 +10,11 @@ import {
     ActivityIndicator
 } from 'react-native';
 import { connect } from 'react-redux';
-import OrderItem from './OrderItem'
+import OrderItem from './OrderItem';
+import {GET_ORDER_DATA} from '../constants/ActionTypes';
 
 var styles = require('../style/styles');
 var win_width = Dimensions.get('window').width;
-var win_height = Dimensions.get('window').height;
 
 BackAndroid.addEventListener('hardwareBackPress', function() {
     if (navigator && navigator.getCurrentRoutes().length > 1) {
@@ -30,7 +30,7 @@ BackAndroid.addEventListener('hardwareBackPress', function() {
     loading: state.order_reducer.loading,
   }),
   dispatch => ({
-    refresh: () => dispatch({type: 'GET_ORDER_DATA'}),
+    refresh: () => dispatch({type: GET_ORDER_DATA}),
   }),
 )
 class ViewOrderPage extends Component {

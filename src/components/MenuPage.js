@@ -16,10 +16,10 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import MenuItem from './MenuItem';
+import {SEND_ORDER_DATA} from '../constants/ActionTypes'
 
 var styles = require('../style/styles');
 var win_width = Dimensions.get('window').width;
-var win_height = Dimensions.get('window').height;
 
 BackAndroid.addEventListener('hardwareBackPress', function() {
     if (navigator && navigator.getCurrentRoutes().length > 1) {
@@ -37,10 +37,10 @@ BackAndroid.addEventListener('hardwareBackPress', function() {
   }),
   dispatch => ({
     refresh: () => dispatch({type: 'GET_MENU_DATA'}),
-  }),
+  }), 
 )
 class MenuPage extends Component {
-    componentWillMount() {
+    componentWillUnmount() {
       this.props.store.dispatch({type:'RESET_TICKET'});
     }
     render() {
@@ -94,7 +94,7 @@ class MenuPage extends Component {
         this.props.navigator.pop();
     }
     orderFood() {
-        this.props.store.dispatch({type:'SEND_ORDER_DATA'});
+        this.props.store.dispatch({type:SEND_ORDER_DATA});
         ToastAndroid.show('Comanda plasata', ToastAndroid.SHORT);
     }
 }
