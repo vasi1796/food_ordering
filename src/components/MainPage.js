@@ -23,12 +23,12 @@ class MainPage extends Component {
                         width: win_width,
                         backgroundColor: '#1565C0'
                     }
-                ]}>
+                ]} elevation={3}>
                     <Text style={[
                         styles.text, {
                             textAlignVertical: 'center'
                         }
-                    ]}>Oameni in cantina:</Text>
+                    ]}>Oameni in cantina</Text>
                     <PeopleCounter/>
                 </View>
                 <View style={{

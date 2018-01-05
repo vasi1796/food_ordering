@@ -50,7 +50,7 @@ class MenuPage extends Component {
         var _scrollView : ScrollView;
         return (
             <View style={styles.parentView}>
-                <View style={{flexDirection: 'row',backgroundColor:"#1565C0",paddingTop:5,paddingBottom:5,alignItems: 'center',padding:10}}>
+                <View style={{flexDirection: 'row',backgroundColor:"#1565C0",paddingTop:5,paddingBottom:5,alignItems: 'center',padding:10}} elevation={5}>
                     <TouchableOpacity onPress={this.gotoMainPage.bind(this)}>
                         <Image style={{width:30,height:25}}
                                source={require('../images/back_left.png')}/>
@@ -74,7 +74,7 @@ class MenuPage extends Component {
                         }} automaticallyAdjustContentInsets={false} horizontal={false} style={styles.menuDescription}>
                         {menus.map((menu, index) => <MenuItem
                             name={menu.title}
-                            price={parseInt(menu.price)}
+                            price={parseFloat(menu.price)}
                             ingredients={menu.ingredients}
                             key={index}
                             dispatch={store.dispatch}
@@ -86,7 +86,7 @@ class MenuPage extends Component {
                 </View>
                 </ScrollView>
                 <View style={styles.totalBoxText}>
-                        <Text style={styles.text}>Total:{totalPrice}</Text>
+                        <Text style={styles.text}>Total: {totalPrice} RON</Text>
                 </View>
                 <TouchableNativeFeedback onPress={this.orderFood.bind(this)} background={TouchableNativeFeedback.SelectableBackground()}>
                     <View style={styles.placeOrder}>

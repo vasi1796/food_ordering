@@ -41,7 +41,7 @@ class ViewOrderPage extends Component {
         var _scrollView : ScrollView;
         return (
             <View style={styles.parentView}>
-                <View style={{flexDirection: 'row',backgroundColor:"#1565C0",paddingTop:5,paddingBottom:5,alignItems: 'center',padding:10}}>
+                <View style={{flexDirection: 'row',backgroundColor:"#1565C0",paddingTop:5,paddingBottom:5,alignItems: 'center',padding:10}} elevation={5}>
                     <Text style={{width:40}}></Text>
                     <Text style={[styles.text,{textAlign:'center',
                                 fontWeight:'bold',fontSize:20,
@@ -58,8 +58,13 @@ class ViewOrderPage extends Component {
                     showsVerticalScrollIndicator={false}
                     refreshControl={
                     <RefreshControl refreshing={loading} onRefresh={refresh} />}>
+                <View style={{flexDirection:'row', backgroundColor: '#ededed'}} elevation={3}>
                 <View style={styles.noTicket}>
-                    <Text style={[styles.text,{color:'#313338'}]}>Nr Tichet: #{order!=null?order.ticket:"Nu exista in baza de date"}</Text>
+                    <Text style={[styles.text,{color:'#313338',textAlign:'center'}]}>Estimat{'\n'}{order!=null?order.ticket:"Nu exista in baza de date"} minute</Text>
+                </View>
+                <View style={styles.noTicket}>
+                    <Text style={[styles.text,{color:'#313338',textAlign:'center'}]}>Nr. Tichet{'\n'}#{order!=null?order.ticket:"Nu exista in baza de date"}</Text>
+                </View>
                 </View>
                 <View style={styles.orderMenu}>
                     {order?
@@ -79,7 +84,7 @@ class ViewOrderPage extends Component {
                 </View>
                 </ScrollView>
                 <View style={styles.orderTotalBoxText}>
-                        <Text style={styles.text}>Total: {order!=null?order.price:""}RON</Text>
+                        <Text style={styles.text}>Total: {order!=null?order.price:""} RON</Text>
                 </View>
             </View>
         );

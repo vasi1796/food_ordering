@@ -23,28 +23,14 @@ module.exports = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'center',
-        backgroundColor: '#f2f2f2'
+        backgroundColor: '#fcfcfc'
     },
     orderMenu: {
         flex: 1,
         flexDirection: 'column',
         backgroundColor: '#f2f2f2'
     },
-    singleText: {
-        alignSelf: 'center',
-        width: win_width - 50,
-        marginTop: 10,
-        padding: 15,
-        borderWidth: 0.1,
-        backgroundColor: 'steelblue',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderTopLeftRadius: 8,
-        borderTopRightRadius: 8
-    },
     totalBoxText: {
-        alignSelf: 'center',
-        width: win_width ,
         padding: 15,
         borderWidth: 0.1,
         backgroundColor: '#1676e2',
@@ -52,16 +38,13 @@ module.exports = StyleSheet.create({
         alignItems: 'center'
     },
     placeOrder: {
-        alignSelf: 'center',
-        width: win_width,
         padding: 15,
         backgroundColor: '#1565C0',
         justifyContent: 'center',
         alignItems: 'center',
     },
     menuDescription: {
-        alignSelf: 'center',
-        width: win_width,
+        flex:1,
         backgroundColor: '#f2f2f2',
         borderWidth: 0.1
     },
@@ -69,27 +52,22 @@ module.exports = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'center',
-        alignSelf: 'center',
         alignItems: 'center'
     },
     noTicket: {
         alignSelf: 'center',
-        width: win_width,
-        height:50,
-        backgroundColor: '#dddddd',
+        flex:1,
+        height:60,
         justifyContent: 'center',
         alignItems: 'center',
     },
     orderDescription: {
-        alignSelf: 'center',
-        width: win_width,
-        padding: 15,
+        flex:1,
+        padding: 20,
         backgroundColor: '#fcfcfc',
         borderWidth: 0.1
     },
     orderTotalBoxText: {
-        alignSelf: 'center',
-        width: win_width,
         padding: 15,
         borderWidth: 0.1,
         backgroundColor: '#1676e2',

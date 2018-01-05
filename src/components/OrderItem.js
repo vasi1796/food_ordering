@@ -9,9 +9,7 @@ var styles = require('../style/styles');
 class OrderItem extends Component {
     render() {
         return (
-            <View style={{
-                flexDirection: 'row'
-            }}>
+            <View>
                 <Text style={[
                     styles.text, {
                         flex: 1,
