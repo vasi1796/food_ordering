@@ -20,10 +20,10 @@ class MenuItem extends Component {
                 flex:1,
                 padding:15,
                 marginBottom:2,
-                backgroundColor:'#ededed'}}>
+                backgroundColor:'#fcfcfc'}}>
                 <View style={{flexDirection: 'row'}}>
                     <View style={{flex:1}}>
-                        <Text style={[styles.text, {textAlign: 'left',color:'#313338'}]}>
+                        <Text style={[styles.text, {textAlign: 'left',color:'#313338',fontSize:17}]}>
                         {this.props.name}
                         </Text>
                         <Text>{this.props.ingredients}</Text>

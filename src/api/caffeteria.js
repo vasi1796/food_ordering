@@ -1,5 +1,5 @@
 import { Platform } from 'react-native';
-const API = 'http://192.168.100.3:3000/v1';
+const API = 'https://food-unitbv.herokuapp.com/v1';
 export const apiMiddleware = store => next => action => {
   // Pass all actions through by default
   next(action);
@@ -22,7 +22,7 @@ export const apiMiddleware = store => next => action => {
       break;
     case 'GET_ORDER_DATA':
       store.dispatch({type:'GET_ORDER_DATA_LOADING'});
-      fetch(`${API}/order/:orderId=1`)
+      fetch(`${API}/order/:orderId=53`)
         .then(response => response.json())
         .then(data => next({
           type: 'GET_ORDER_DATA_RECEIVED',

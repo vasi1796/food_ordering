@@ -15,21 +15,17 @@ class OrderItem extends Component {
                 <Text style={[
                     styles.text, {
                         flex: 1,
-                        textAlign: 'left'
+                        textAlign: 'center',
+                        color:'#313338',
+                        fontSize:17
                     }
                 ]}>{this.props.name}</Text>
-                <Text style={[
-                    styles.text, {
-                        textAlign: 'right'
-                    }
-                ]}>{this.props.price}</Text>
             </View>
         );
     }
 }
 
 OrderItem.propTypes = {
-  price: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
 }
 

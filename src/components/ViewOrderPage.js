@@ -7,7 +7,9 @@ import {
     BackAndroid,
     ScrollView,
     RefreshControl,
-    ActivityIndicator
+    ActivityIndicator,
+    TouchableOpacity,
+    Image
 } from 'react-native';
 import { connect } from 'react-redux';
 import OrderItem from './OrderItem';
@@ -39,10 +41,17 @@ class ViewOrderPage extends Component {
         var _scrollView : ScrollView;
         return (
             <View style={styles.parentView}>
-                <Button style={{
-                    width: win_width,
-                    flex: 1
-                }} onPress={this.gotoMainPage.bind(this)} title="Inapoi" color="#1565C0"/>
+                <View style={{flexDirection: 'row',backgroundColor:"#1565C0",paddingTop:5,paddingBottom:5,alignItems: 'center',padding:10}}>
+                    <Text style={{width:40}}></Text>
+                    <Text style={[styles.text,{textAlign:'center',
+                                fontWeight:'bold',fontSize:20,
+                                flex:1 }]}>Comanda
+                    </Text>
+                    <TouchableOpacity onPress={this.gotoMainPage.bind(this)}>
+                        <Image style={{width:30,height:25}}
+                               source={require('../images/back_right.png')}/>
+                    </TouchableOpacity>
+                </View>
                 <ScrollView
                     // Hide all scroll indicators
                     showsHorizontalScrollIndicator={false}
@@ -50,18 +59,15 @@ class ViewOrderPage extends Component {
                     refreshControl={
                     <RefreshControl refreshing={loading} onRefresh={refresh} />}>
                 <View style={styles.noTicket}>
-                    <Text style={styles.text}>Nr Tichet: {order!=null?order.ticket:"Nu exista in baza de date"}</Text>
+                    <Text style={[styles.text,{color:'#313338'}]}>Nr Tichet: #{order!=null?order.ticket:"Nu exista in baza de date"}</Text>
                 </View>
                 <View style={styles.orderMenu}>
-                    <View style={styles.singleText}>
-                        <Text style={styles.text}>Comanda</Text>
-                    </View>
                     {order?
                     
                     <ScrollView ref={(scrollView) => {
                         _scrollView = scrollView;
                     }} automaticallyAdjustContentInsets={false} horizontal={false} style={styles.orderDescription}>
-                    <OrderItem name={order.title} price={order.price}/>
+                    <OrderItem name={order.title}/>
                     </ScrollView>
                     
                     :
@@ -70,11 +76,11 @@ class ViewOrderPage extends Component {
                     }} automaticallyAdjustContentInsets={false} horizontal={false} style={styles.orderDescription}>
                     <OrderItem name="Nu exista comanda" price=""/>
                     </ScrollView>}
-                    <View style={styles.orderTotalBoxText}>
-                        <Text style={styles.text}>Total: {order!=null?order.price:""}</Text>
-                    </View>
                 </View>
                 </ScrollView>
+                <View style={styles.orderTotalBoxText}>
+                        <Text style={styles.text}>Total: {order!=null?order.price:""}RON</Text>
+                </View>
             </View>
         );
     }

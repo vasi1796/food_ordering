@@ -23,12 +23,12 @@ module.exports = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'center',
-        backgroundColor: '#afafaf'
+        backgroundColor: '#f2f2f2'
     },
     orderMenu: {
         flex: 1,
         flexDirection: 'column',
-        backgroundColor: '#BBDEFB'
+        backgroundColor: '#f2f2f2'
     },
     singleText: {
         alignSelf: 'center',
@@ -62,7 +62,7 @@ module.exports = StyleSheet.create({
     menuDescription: {
         alignSelf: 'center',
         width: win_width,
-        backgroundColor: '#c4c4c4',
+        backgroundColor: '#f2f2f2',
         borderWidth: 0.1
     },
     peopleInCaffeteria: {
@@ -74,32 +74,26 @@ module.exports = StyleSheet.create({
     },
     noTicket: {
         alignSelf: 'center',
-        width: win_width - 50,
-        margin: 10,
-        padding: 15,
-        backgroundColor: 'steelblue',
+        width: win_width,
+        height:50,
+        backgroundColor: '#dddddd',
         justifyContent: 'center',
         alignItems: 'center',
-        borderWidth: 0.1,
-        borderRadius: 8
     },
     orderDescription: {
         alignSelf: 'center',
-        width: win_width - 50,
+        width: win_width,
         padding: 15,
-        backgroundColor: '#64B5F6',
+        backgroundColor: '#fcfcfc',
         borderWidth: 0.1
     },
     orderTotalBoxText: {
         alignSelf: 'center',
-        width: win_width - 50,
-        marginBottom: 10,
+        width: win_width,
         padding: 15,
         borderWidth: 0.1,
-        backgroundColor: 'steelblue',
+        backgroundColor: '#1676e2',
         justifyContent: 'center',
-        alignItems: 'center',
-        borderBottomLeftRadius: 8,
-        borderBottomRightRadius: 8
+        alignItems: 'center'
     }
 });
