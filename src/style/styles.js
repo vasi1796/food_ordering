@@ -23,7 +23,7 @@ module.exports = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'center',
-        backgroundColor: '#BBDEFB'
+        backgroundColor: '#afafaf'
     },
     orderMenu: {
         flex: 1,
@@ -44,31 +44,25 @@ module.exports = StyleSheet.create({
     },
     totalBoxText: {
         alignSelf: 'center',
-        width: win_width - 50,
+        width: win_width ,
         padding: 15,
         borderWidth: 0.1,
-        backgroundColor: 'steelblue',
+        backgroundColor: '#1676e2',
         justifyContent: 'center',
-        alignItems: 'center',
-        borderBottomLeftRadius: 8,
-        borderBottomRightRadius: 8
+        alignItems: 'center'
     },
     placeOrder: {
         alignSelf: 'center',
-        width: win_width - 50,
-        margin: 10,
+        width: win_width,
         padding: 15,
-        backgroundColor: 'steelblue',
+        backgroundColor: '#1565C0',
         justifyContent: 'center',
         alignItems: 'center',
-        borderWidth: 0.1,
-        borderRadius: 8
     },
     menuDescription: {
         alignSelf: 'center',
-        width: win_width - 50,
-        padding: 15,
-        backgroundColor: '#64B5F6',
+        width: win_width,
+        backgroundColor: '#c4c4c4',
         borderWidth: 0.1
     },
     peopleInCaffeteria: {

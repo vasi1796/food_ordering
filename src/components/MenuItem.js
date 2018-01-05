@@ -4,6 +4,7 @@ import {
     Text,
     View,
     Switch,
+    Button,
 } from 'react-native';
 import {ADD_TO_ORDER,REMOVE_FROM_ORDER} from '../constants/ActionTypes'
 var styles = require('../style/styles');
@@ -15,28 +16,28 @@ class MenuItem extends Component {
     render() {
         return (
             <View style={{
-                flexDirection: 'row'
-            }}>
-                <Text style={[
-                    styles.text, {
-                        flex: 1,
-                        textAlign: 'left'
-                    }
-                ]}>{this.props.name}</Text>
-                <Text style={[
-                    styles.text, {
-                        textAlign: 'right'
-                    }
-                ]}>{this.props.price}</Text>
-                <Switch onValueChange={(value) => this.setState({
-                    on: value
-                }, value
-                    ? this.props.dispatch({type: ADD_TO_ORDER,price:this.props.price,name:this.props.name})
-                    : this.props.dispatch({type: REMOVE_FROM_ORDER,price:this.props.price,name:this.props.name}))} style={{
-                    marginBottom: 10,
-                    paddingLeft: 10,
-                    paddingTop: 0.1
-                }} value={this.state.on}/>
+                flexDirection: 'column',
+                flex:1,
+                padding:15,
+                marginBottom:2,
+                backgroundColor:'#ededed'}}>
+                <View style={{flexDirection: 'row'}}>
+                    <View style={{flex:1}}>
+                        <Text style={[styles.text, {textAlign: 'left',color:'#313338'}]}>
+                        {this.props.name}
+                        </Text>
+                        <Text>{this.props.ingredients}</Text>
+                        <Text style={[styles.text, {textAlign: 'left',color:'#0d4687'}]}>{this.props.price} RON</Text>
+                    </View>
+                <View style={{alignSelf:'center',width:100,}}>
+                    <Button onPress={()=>this.setState({on:!this.state.on},
+                        this.state.on?
+                        this.props.dispatch({type: REMOVE_FROM_ORDER,price:this.props.price,name:this.props.name})
+                        : this.props.dispatch({type: ADD_TO_ORDER,price:this.props.price,name:this.props.name}))}
+                            title={this.state.on?"Remove":"Add"}
+                            color='#1155a3'/>
+                </View>
+                </View>
             </View>
         );
     }
@@ -44,6 +45,7 @@ class MenuItem extends Component {
 
 MenuItem.propTypes = {
   price: PropTypes.number.isRequired,
+  ingredients: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   dispatch: PropTypes.func.isRequired
 }

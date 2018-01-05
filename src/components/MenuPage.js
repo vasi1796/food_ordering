@@ -13,6 +13,8 @@ import {
     ToastAndroid,
     ActivityIndicator,
     RefreshControl,
+    Image,
+    TouchableOpacity
 } from 'react-native';
 import { connect } from 'react-redux';
 import MenuItem from './MenuItem';
@@ -48,45 +50,50 @@ class MenuPage extends Component {
         var _scrollView : ScrollView;
         return (
             <View style={styles.parentView}>
-                <Button style={{
-                    width: win_width,
-                    flex: 1
-                }} onPress={this.gotoMainPage.bind(this)} title="Inapoi" color="#1565C0"/>
-                <ScrollView
+                <View style={{flexDirection: 'row',backgroundColor:"#1565C0",paddingTop:5,paddingBottom:5,alignItems: 'center',padding:10}}>
+                    <TouchableOpacity onPress={this.gotoMainPage.bind(this)}>
+                        <Image style={{width:30,height:25}}
+                               source={require('../images/back_left.png')}/>
+                    </TouchableOpacity>
+                    <Text style={[styles.text,{textAlign:'center',
+                                fontWeight:'bold',fontSize:20,
+                                flex:1 }]}>Meniu
+                    </Text>
+                    <Text style={{width:40}}></Text>
+                </View>
+                <ScrollView style={styles.menuDescription}
                     // Hide all scroll indicators
                     showsHorizontalScrollIndicator={false}
                     showsVerticalScrollIndicator={false}
                     refreshControl={
                     <RefreshControl refreshing={loading} onRefresh={refresh}/>}>
-                <View style={styles.orderMenu}>
-                    <View style={styles.singleText}>
-                        <Text style={styles.text}>Meniu</Text>
-                    </View>
+                <View>
                     {menus ? 
-                    
                         <ScrollView ref={(scrollView) => {
                         _scrollView = scrollView;
                         }} automaticallyAdjustContentInsets={false} horizontal={false} style={styles.menuDescription}>
                         {menus.map((menu, index) => <MenuItem
                             name={menu.title}
                             price={parseInt(menu.price)}
+                            ingredients={menu.ingredients}
                             key={index}
                             dispatch={store.dispatch}
                         />)}
                         </ScrollView>
-                    
                     : 
                     <ActivityIndicator animating={loading} size="large"/>}
-                    <View style={styles.totalBoxText}>
+                    
+                </View>
+                </ScrollView>
+                <View style={styles.totalBoxText}>
                         <Text style={styles.text}>Total:{totalPrice}</Text>
-                    </View>
                 </View>
                 <TouchableNativeFeedback onPress={this.orderFood.bind(this)} background={TouchableNativeFeedback.SelectableBackground()}>
                     <View style={styles.placeOrder}>
                         <Text style={styles.text}>Comanda</Text>
                     </View>
                 </TouchableNativeFeedback>
-                </ScrollView>
+                
             </View>
         );
     }
