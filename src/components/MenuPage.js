@@ -86,7 +86,7 @@ class MenuPage extends Component {
                 </View>
                 </ScrollView>
                 <View style={styles.totalBoxText}>
-                        <Text style={styles.text}>Total: {totalPrice} RON</Text>
+                        <Text style={styles.text}>Total: {totalPrice.toFixed(1)} RON</Text>
                 </View>
                 <TouchableNativeFeedback onPress={this.orderFood.bind(this)} background={TouchableNativeFeedback.SelectableBackground()}>
                     <View style={styles.placeOrder}>

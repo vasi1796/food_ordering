@@ -22,7 +22,7 @@ export const apiMiddleware = store => next => action => {
       break;
     case 'GET_ORDER_DATA':
       store.dispatch({type:'GET_ORDER_DATA_LOADING'});
-      fetch(`${API}/order/:orderId=53`)
+      fetch(`${API}/order/:orderId=33`)
         .then(response => response.json())
         .then(data => next({
           type: 'GET_ORDER_DATA_RECEIVED',
@@ -52,6 +52,20 @@ export const apiMiddleware = store => next => action => {
         }))
         .catch(error => next({
           type: 'SEND_ORDER_DATA_ERROR',
+          error
+        }));
+      fetch(`${API}/inc_people`,{method:'PUT'});
+      break;
+    case 'GET_PEOPLE_DATA':
+    store.dispatch({type:'GET_PEOPLE_DATA_LOADING'});
+      fetch(`${API}/people.json`)
+        .then(response => response.json())
+        .then(data => next({
+          type: 'GET_PEOPLE_DATA_RECEIVED',
+          data
+        }))
+        .catch(error => next({
+          type: 'GET_PEOPLE_DATA_ERROR',
           error
         }));
       break;

@@ -30,6 +30,7 @@ BackAndroid.addEventListener('hardwareBackPress', function() {
   state => ({
     order: state.order_reducer.order,
     loading: state.order_reducer.loading,
+    people: state.people_reducer.people
   }),
   dispatch => ({
     refresh: () => dispatch({type: GET_ORDER_DATA}),
@@ -37,7 +38,7 @@ BackAndroid.addEventListener('hardwareBackPress', function() {
 )
 class ViewOrderPage extends Component {
     render() {
-        const { order, loading, refresh } = this.props;
+        const { order, loading, refresh ,people} = this.props;
         var _scrollView : ScrollView;
         return (
             <View style={styles.parentView}>
@@ -60,7 +61,7 @@ class ViewOrderPage extends Component {
                     <RefreshControl refreshing={loading} onRefresh={refresh} />}>
                 <View style={{flexDirection:'row', backgroundColor: '#ededed'}} elevation={3}>
                 <View style={styles.noTicket}>
-                    <Text style={[styles.text,{color:'#313338',textAlign:'center'}]}>Estimat{'\n'}{order!=null?order.ticket:"Nu exista in baza de date"} minute</Text>
+                    <Text style={[styles.text,{color:'#313338',textAlign:'center'}]}>Estimat{'\n'}{order!=null?people*2:"0"} minute</Text>
                 </View>
                 <View style={styles.noTicket}>
                     <Text style={[styles.text,{color:'#313338',textAlign:'center'}]}>Nr. Tichet{'\n'}#{order!=null?order.ticket:"Nu exista in baza de date"}</Text>

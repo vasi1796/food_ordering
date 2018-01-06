@@ -5,7 +5,7 @@ import {
 } from '../constants/ActionTypes'
 
 
-export const order_reducer = (state={order:[],sent:false,loading:true},action)=>{
+export const order_reducer = (state={order:[],loading:true},action)=>{
   switch(action.type){
     case GET_ORDER_DATA_LOADING:
     return{

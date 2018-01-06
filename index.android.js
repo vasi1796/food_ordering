@@ -8,6 +8,7 @@ import reducer from './src/reducers'
 const store = createStore(reducer, applyMiddleware(apiMiddleware));
 store.dispatch({type: 'GET_MENU_DATA'});
 store.dispatch({type: 'GET_ORDER_DATA'});
+store.dispatch({type: 'GET_PEOPLE_DATA'});
 
 var MenuPage = require('./src/components/MenuPage');
 var MainPage = require('./src/components/MainPage');
