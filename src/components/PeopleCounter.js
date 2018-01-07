@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
     Text
 } from 'react-native';
-var styles = require('../style/styles');
+const styles = require('../style/styles');
 
 class PeopleCounter extends Component {
     render() {
@@ -19,6 +19,6 @@ class PeopleCounter extends Component {
 
 PeopleCounter.propTypes = {
   people: PropTypes.number.isRequired,
-}
+};
 
 module.exports = PeopleCounter;

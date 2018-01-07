@@ -13,9 +13,13 @@ module.exports = StyleSheet.create({
         alignItems: 'center'
     },
     choices_view: {
-        flex: 1,
+        padding:20,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginBottom:5,
+        borderRadius:50,
+        width:170,
+        backgroundColor:"#1676e2"
     },
     parentView: {
         flex: 1,
@@ -47,10 +51,13 @@ module.exports = StyleSheet.create({
         borderWidth: 0.1
     },
     peopleInCaffeteria: {
-        flex: 1,
         flexDirection: 'column',
+        flex: 1,
+        padding:5,
+        alignSelf: 'stretch',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: '#1565C0'
     },
     noTicket: {
         alignSelf: 'center',

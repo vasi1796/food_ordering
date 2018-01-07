@@ -6,7 +6,7 @@ import {
     Button,
 } from 'react-native';
 import {ADD_TO_ORDER,REMOVE_FROM_ORDER} from '../constants/ActionTypes'
-var styles = require('../style/styles');
+const styles = require('../style/styles');
 
 class MenuItem extends Component {
     state = {
@@ -33,7 +33,7 @@ class MenuItem extends Component {
                         this.state.on?
                         this.props.dispatch({type: REMOVE_FROM_ORDER,price:this.props.price,name:this.props.name})
                         : this.props.dispatch({type: ADD_TO_ORDER,price:this.props.price,name:this.props.name}))}
-                            title={this.state.on?"Remove":"Add"}
+                            title={this.state.on?"Sterge":"Adauga"}
                             color='#1155a3'/>
                 </View>
                 </View>
@@ -47,6 +47,6 @@ MenuItem.propTypes = {
   ingredients: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   dispatch: PropTypes.func.isRequired
-}
+};
 
 module.exports = MenuItem;

@@ -8,7 +8,6 @@ import {
     BackAndroid,
     ScrollView,
     ToastAndroid,
-    ActivityIndicator,
     RefreshControl,
     Image,
     TouchableOpacity
@@ -17,7 +16,7 @@ import { connect } from 'react-redux';
 import MenuItem from './MenuItem';
 import {SEND_ORDER_DATA} from '../constants/ActionTypes'
 
-var styles = require('../style/styles');
+const styles = require('../style/styles');
 
 BackAndroid.addEventListener('hardwareBackPress', function() {
     if (navigator && navigator.getCurrentRoutes().length > 1) {
@@ -43,7 +42,7 @@ class MenuPage extends Component {
     }
     render() {
         const { menus, loading, refresh, store, totalPrice } = this.props;
-        var _scrollView : ScrollView;
+        let _scrollView : ScrollView;
         return (
             <View style={styles.parentView}>
                 <View style={{flexDirection: 'row',backgroundColor:"#1565C0",paddingTop:5,paddingBottom:5,alignItems: 'center',padding:10}} elevation={5}>
@@ -76,9 +75,9 @@ class MenuPage extends Component {
                             dispatch={store.dispatch}
                         />)}
                         </ScrollView>
-                    : 
-                    <ActivityIndicator animating={loading} size="large"/>}
-                    
+                    :
+                        ToastAndroid.show('Nu se poate conecta la baza de date', ToastAndroid.SHORT)
+                    }
                 </View>
                 </ScrollView>
                 <View style={styles.totalBoxText}>

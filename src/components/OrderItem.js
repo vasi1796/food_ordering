@@ -4,7 +4,7 @@ import {
     Text,
     View
 } from 'react-native';
-var styles = require('../style/styles');
+const styles = require('../style/styles');
 
 class OrderItem extends Component {
     render() {
@@ -25,6 +25,6 @@ class OrderItem extends Component {
 
 OrderItem.propTypes = {
   name: PropTypes.string.isRequired,
-}
+};
 
 module.exports = OrderItem;

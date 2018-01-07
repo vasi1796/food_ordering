@@ -3,26 +3,24 @@ import React, {Component} from 'react';
 import {
     Text,
     View,
-    Dimensions,
     TouchableNativeFeedback,
     StatusBar,
-    ScrollView
+    Image
 } from 'react-native';
 import PeopleCounter from './PeopleCounter';
 import { connect } from 'react-redux';
 import {GET_PEOPLE_DATA} from '../constants/ActionTypes';
 import TimerMixin from 'react-timer-mixin';
-var styles = require('../style/styles');
-var win_width = Dimensions.get('window').width;
+const styles = require('../style/styles');
 
 @connect(
-  state => ({
-    people: state.people_reducer.people,
-    loading: state.people_reducer.loading,
-  }),
-  dispatch => ({
-    updatePeople: () => dispatch({type: 'GET_PEOPLE_DATA'}),
-  }), 
+    state => ({
+        people: state.people_reducer.people,
+        loading: state.people_reducer.loading,
+    }),
+    dispatch => ({
+        updatePeople: () => dispatch({type: 'GET_PEOPLE_DATA'}),
+    }),
 )
 class MainPage extends Component {
     mixins : [TimerMixin];
@@ -38,46 +36,34 @@ class MainPage extends Component {
         TimerMixin.clearInterval(this.update);
     }
     render() {
-        const { people, loading } = this.props;
-        var _scrollView : ScrollView;
+        const { people } = this.props;
         return (
             <View style={styles.mainPage_generalView}>
                 <StatusBar backgroundColor="#0D47A1" barStyle="light-content"/>
-                <View style={[
-                    styles.peopleInCaffeteria, {
-                        width: win_width,
-                        backgroundColor: '#1565C0'
-                    }
-                ]} elevation={3}>
-                    <Text style={[
-                        styles.text, {
-                            textAlignVertical: 'center'
-                        }
-                    ]}>Oameni in cantina</Text>
-                    <PeopleCounter people={people}/>
+                <View style={styles.peopleInCaffeteria} elevation={3}>
+                    <Image style={{width:40,height:40}}
+                           source={require('../images/sigla.png')}/>
                 </View>
-                <View style={{
-                    flex:10,
-                    flexDirection: 'row'
-                }}>
-                    <TouchableNativeFeedback onPress={this.gotoViewOrderPage.bind(this)} background={TouchableNativeFeedback.SelectableBackground()}>
-                        <View style={[
-                            styles.choices_view, {
-                                backgroundColor: '#64B5F6'
-                            }
-                        ]}>
-                            <Text style={styles.text}>Vezi Comanda</Text>
-                        </View>
-                    </TouchableNativeFeedback>
+                <Image style={{flex:10,resizeMode: 'cover',width: null,
+                    alignSelf: 'stretch',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',}}
+                       source={require('../images/food.jpg')}>
                     <TouchableNativeFeedback onPress={this.gotoMenuPage.bind(this)} background={TouchableNativeFeedback.SelectableBackground()}>
-                        <View style={[
-                            styles.choices_view, {
-                                backgroundColor: '#2196F3'
-                            }
-                        ]}>
+                        <View style={styles.choices_view} elevation={3}>
                             <Text style={styles.text}>Comanda Mancare</Text>
                         </View>
                     </TouchableNativeFeedback>
+                    <TouchableNativeFeedback onPress={this.gotoViewOrderPage.bind(this)} background={TouchableNativeFeedback.SelectableBackground()}>
+                        <View style={styles.choices_view} elevation={3}>
+                            <Text style={styles.text}>Vezi Comanda</Text>
+                        </View>
+                    </TouchableNativeFeedback>
+                </Image>
+                <View style={styles.peopleInCaffeteria} elevation={3}>
+                    <Text style={styles.text}>Oameni in cantina</Text>
+                    <PeopleCounter people={people}/>
                 </View>
             </View>
         );
