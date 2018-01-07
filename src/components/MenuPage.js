@@ -5,11 +5,8 @@ import {
     Text,
     View,
     TouchableNativeFeedback,
-    Button,
     BackAndroid,
-    Dimensions,
     ScrollView,
-    Switch,
     ToastAndroid,
     ActivityIndicator,
     RefreshControl,
@@ -21,7 +18,6 @@ import MenuItem from './MenuItem';
 import {SEND_ORDER_DATA} from '../constants/ActionTypes'
 
 var styles = require('../style/styles');
-var win_width = Dimensions.get('window').width;
 
 BackAndroid.addEventListener('hardwareBackPress', function() {
     if (navigator && navigator.getCurrentRoutes().length > 1) {

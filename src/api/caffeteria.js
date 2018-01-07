@@ -1,4 +1,3 @@
-import { Platform } from 'react-native';
 const API = 'https://food-unitbv.herokuapp.com/v1';
 export const apiMiddleware = store => next => action => {
   // Pass all actions through by default
@@ -35,12 +34,12 @@ export const apiMiddleware = store => next => action => {
       break;
     case 'SEND_ORDER_DATA':
     var ticket_id=Math.floor(Math.random()* 100);
-      var payload = {
+    var payload = {
     ticket: ticket_id.toString(),
     title: store.getState().ticket_reducer.ticket,
     price: store.getState().ticket_reducer.price
  };
-      var ticket = store.dispatch({type:'SEND_ORDER_DATA_LOADING'});
+      store.dispatch({type:'SEND_ORDER_DATA_LOADING'});
       fetch(`${API}/order`,
         {method:'POST',
         headers: {'Content-Type': 'application/json'},

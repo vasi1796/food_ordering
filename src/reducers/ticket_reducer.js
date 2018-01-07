@@ -32,14 +32,14 @@ export const ticket_reducer = (state={ticket:[],sent:false,price:0},action)=>{
     return{
       ...state,
       sent:false,
-    }
+    };
     case SENT_ORDER_DATA:
     return{
       sent:true,
-    }
+    };
     case SEND_ORDER_DATA_ERROR:
       return state;
     default:
      return state;
-  };
+  }
 };

@@ -2,12 +2,9 @@ import React, {Component} from 'react';
 import {
     Text,
     View,
-    Dimensions,
-    Button,
     BackAndroid,
     ScrollView,
     RefreshControl,
-    ActivityIndicator,
     TouchableOpacity,
     Image
 } from 'react-native';
@@ -16,7 +13,6 @@ import OrderItem from './OrderItem';
 import {GET_ORDER_DATA} from '../constants/ActionTypes';
 
 var styles = require('../style/styles');
-var win_width = Dimensions.get('window').width;
 
 BackAndroid.addEventListener('hardwareBackPress', function() {
     if (navigator && navigator.getCurrentRoutes().length > 1) {

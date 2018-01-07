@@ -1,8 +1,6 @@
 'use strict';
 import React from 'react';
-import {Dimensions, StyleSheet} from 'react-native';
-var win_width = Dimensions.get('window').width;
-var win_height = Dimensions.get('window').height;
+import {StyleSheet} from 'react-native';
 module.exports = StyleSheet.create({
     text: {
         color: 'white',

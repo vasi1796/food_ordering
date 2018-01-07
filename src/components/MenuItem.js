@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import {
     Text,
     View,
-    Switch,
     Button,
 } from 'react-native';
 import {ADD_TO_ORDER,REMOVE_FROM_ORDER} from '../constants/ActionTypes'

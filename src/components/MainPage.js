@@ -6,8 +6,7 @@ import {
     Dimensions,
     TouchableNativeFeedback,
     StatusBar,
-    ScrollView,
-    RefreshControl
+    ScrollView
 } from 'react-native';
 import PeopleCounter from './PeopleCounter';
 import { connect } from 'react-redux';
@@ -15,7 +14,6 @@ import {GET_PEOPLE_DATA} from '../constants/ActionTypes';
 import TimerMixin from 'react-timer-mixin';
 var styles = require('../style/styles');
 var win_width = Dimensions.get('window').width;
-var win_height = Dimensions.get('window').height;
 
 @connect(
   state => ({
@@ -40,7 +38,7 @@ class MainPage extends Component {
         TimerMixin.clearInterval(this.update);
     }
     render() {
-        const { people, loading, refresh } = this.props;
+        const { people, loading } = this.props;
         var _scrollView : ScrollView;
         return (
             <View style={styles.mainPage_generalView}>
