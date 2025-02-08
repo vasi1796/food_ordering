@@ -7,7 +7,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "react": "15.4.2",
+    "react": "15.7.0",
     "react-native": "^0.41.2",
     "react-redux": "^5.0.6",
     "react-timer-mixin": "^0.13.3",
